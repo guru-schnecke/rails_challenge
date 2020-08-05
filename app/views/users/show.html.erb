@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <h3>User information</h3>
+            
+            <div class="text-center">
+                <div>
+                    <img src="http://placehold.it/200x200" class="rounded-circle" alt="...">
+                </div>
+                 <%= @user.firstname %>
+                <%= @user.firstname %>
+
+            
+                <div>
+                <% if current_user.id != @user.id %>
+                    <button>
+                    Follow
+                    </button>
+                
+                    <button>
+                        Unfollow
+                    </button>
+                    <% end %>
+                </div>
+
+                <div>
+                   <% @user.description %>
+                </div>
+                <div>
+                   111 Following
+                </div>
+                <div>
+                   111 Followed
+                </div>
+         
+            </div>
+            
+           
+        </div>
+
+        <div class="col-md-9">
+            <div class="row">
+             <% @user.posts.each do |post| %>
+                <div class="col-md-4">
+                    <div class="card" style="width: inherit">
+                        <% if post.post_image.attached? %>
+                        <%= image_tag post.post_image, width: "100%" %>
+                        <% end %>
+                        <div class="card-body">
+                            <%= link_to  post.title, post_path(post.id) %>
+                        </div>
+                    </div>
+                </div>
+             <% end %>
+            </div>
+        </div>
+    </div>
+</div>

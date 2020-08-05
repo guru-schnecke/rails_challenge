@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <h1>Posts#new</h1>
+    <p>Find me in app/views/posts/new.html.erb</p>
+    <%= form_for @post do |f| %>
+
+    <div class="form-row">
+        <%= f.label :title, "Title" %>
+        <%=  f.text_field :title, class: "form-control" %>
+    </div>
+
+
+    <div class="form-row">
+        <%= f.label :post_image %>
+        <%= f.file_field :post_image %>
+    </div>
+
+    <div>
+        <%= f.submit %>
+    </div>
+    <% end %>
+</div>

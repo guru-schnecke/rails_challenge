@@ -1,0 +1,66 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <h3>User information</h3>
+            
+            <div class="text-center">
+                <div>
+                    <img src="http://placehold.it/200x200" class="rounded-circle" alt="...">
+                </div>
+                 <%= @post.user.firstname %>
+                    <%= @post.user.lastname %>
+                <div>
+                <% if current_user.id != @post.user.id %>
+                    <button>
+                    Follow
+                    </button>
+                
+                    <button>
+                        Unfollow
+                    </button>
+                    <% end %>
+                </div>
+
+                <div>
+                   <% @post.user.description %>
+                </div>
+                <div>
+                   111 Following
+                </div>
+                <div>
+                   111 Followed
+                </div>
+         
+            </div>
+            
+           
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <% if @post.post_image.attached? %>
+                <%= image_tag @post.post_image, height: "auto", width: "100%" %>
+                <% end %>
+                <div class="card-body">
+                    <%= @post.title%>
+                </div>
+            </div>
+            <div>
+                <%= form_for [@post, @comment] do |f| %>
+                    <%= f.text_area :comment %>
+                    <%= f.submit %>
+                <% end %>
+
+            <% @post.comments.each do |comment| %>
+            <div class="media">
+                    <img class="mr-3" src="http://placehold.it/64x64" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <h5 class="mt-0"><%= comment.user.firstname %> <%= comment.user.lastname %></h5>
+                        <%= comment.comment %>
+                    </div>
+                    </div>
+            <% end %>
+                
+            </div>
+        </div>
+    </div>
+</div>
