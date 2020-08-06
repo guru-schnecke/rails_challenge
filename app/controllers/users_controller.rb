@@ -5,6 +5,27 @@ class UsersController < ApplicationController
   def create
   end
 
+  def follow
+    # find user from id
+    @user = User.find(params[:id])
+
+    @current_user_found= User.find(current_user.id)
+    
+    if @current_user_found.following.include?(@user.id.to_s)
+     #if user is already following prompt error
+      redirect_to show_profile_path(@user.username), alert: "Already Following this user"
+    else
+      
+      @current_user_found.following << @user.id
+      if @current_user_found.save
+
+        redirect_to show_profile_path(@user.username), notice: "Now following user"
+      else
+          redirect_to show_profile_path(@user.username), notice: "couldnot follow user"
+      end
+    end
+  end
+
   def show
     @user = User.find_by(username: params[:username])
   end
@@ -16,5 +37,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:id)
   end
 end

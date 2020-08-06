@@ -1,18 +1,28 @@
 <div class="container-fluid">
 <div class="row">
-    <% @posts.each do |post| %>
-   
+
     <div class="col-md-3">
-        <div class="card" style="width: inherit">
-            <% if post.post_image.attached? %>
-                <%= image_tag post.post_image, width: "100%" %>
+        <%# render with variable  %>
+        <%= render  "users/profile", user: current_user %>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row">
+            <% @posts.each do |post| %>
+        
+            <div class="col-md-3">
+                <div class="card" style="width: inherit">
+                    <% if post.post_image.attached? %>
+                        <%= image_tag post.post_image, width: "100%" %>
+                    <% end %>
+                <div class="card-body">
+            <%= link_to  post.title, post_path(post.id) %>
+            </div>
+            </div>
+            </div>
+            
             <% end %>
-        <div class="card-body">
-       <%= link_to  post.title, post_path(post.id) %>
-      </div>
-      </div>
-      </div>
-     
-    <% end %>
+            </div>
+    </div>
     </div>
 </div>

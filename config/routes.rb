@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, except: :show
 
-  get "/profile/:username", to: "users#show"
+  # patch is update
+  patch "/profile/:id/follow", to: "users#follow", as: :new_user_follow
+  get "/profile/:username", to: "users#show", as: :show_profile
+
+ 
 
   resources :posts do
     resources :comments
