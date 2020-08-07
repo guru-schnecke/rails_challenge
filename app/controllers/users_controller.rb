@@ -26,6 +26,31 @@ class UsersController < ApplicationController
     end
   end
 
+  def unfollow
+    # find user from id
+    @user = User.find(params[:id])
+
+    @current_user_found= User.find(current_user.id)
+    
+    if @current_user_found.following.include?(@user.id.to_s)
+     #if user is already following prompt error
+      
+      @current_user_found.following.delete(@user.id.to_s)
+
+      if @current_user_found.save
+
+        redirect_to show_profile_path(@user.username), notice: "User unfollowed"
+      else
+          redirect_to show_profile_path(@user.username), notice: "couldnot unfollow user"
+      end
+
+
+    else
+      redirect_to show_profile_path(@user.username), alert: "User does not follow"
+  
+    end
+  end
+
   def show
     @user = User.find_by(username: params[:username])
   end

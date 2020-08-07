@@ -8,8 +8,16 @@
                 <div>
                 <% if current_user.id != user.id %>
 
-                    <% unless current_user.following.include? user.id.to_s %>
+                    <% if current_user.following.include? user.id.to_s %>
                      <%# show only if user is following %>
+                         <%= form_for user, url: user_unfollow_path(user.id) do |f| %>
+                            <%#= f.hidden_field :id %>
+                            <%= f.submit "unfollow" %>
+                        <% end %>
+
+                        <% else %>
+                       
+
                         <%= form_for user, url: new_user_follow_path(user.id) do |f| %>
                             <%= f.hidden_field :id %>
                             <%= f.submit "follow" %>

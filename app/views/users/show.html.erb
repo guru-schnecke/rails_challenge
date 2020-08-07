@@ -10,7 +10,7 @@
                 <div class="col-md-4">
                     <div class="card" style="width: inherit">
                         <% if post.post_image.attached? %>
-                        <%= image_tag post.post_image, width: "100%" %>
+                            <%= image_tag post.post_image, width: "100%" %>
                         <% end %>
                         <div class="card-body">
                             <%= link_to  post.title, post_path(post.id) %>

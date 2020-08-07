@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   # patch is update
   patch "/profile/:id/follow", to: "users#follow", as: :new_user_follow
+  patch "/profile/:id/unfollow", to: "users#unfollow", as: :user_unfollow
   get "/profile/:username", to: "users#show", as: :show_profile
 
  
